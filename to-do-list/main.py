@@ -2,10 +2,13 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+todos = []
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/{id}")
-async def get_id(id: int):
-    return {"ID": id}
+@app.get("/create/{todo}")
+async def create_todo(todo):
+    todos.append(todo)
+    return todos
